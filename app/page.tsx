@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import styles from './page.module.css';
+import { sdk } from '@farcaster/miniapp-sdk'
 
 type Cell = null | 'X' | 'O';
 type Difficulty = 'easy' | 'medium' | 'hard';
@@ -18,6 +19,17 @@ const LINES = [
 ];
 
 export default function Page() {
+  useEffect(() => {
+    const init = async () => {
+      try {
+        await sdk.actions.ready();
+        console.log("Mini app is ready ✅");
+      } catch (err) {
+        console.error("Error initializing SDK:", err);
+      }
+    };
+    init();
+  }, []);
   return (
     <main className={styles.container}>
       <div className={styles.card}>

@@ -4,6 +4,7 @@ import { Inter, Source_Code_Pro } from "next/font/google";
 // import { minikitConfig } from "../minikit.config";
 import { RootProvider } from "./rootProvider";
 import "./globals.css";
+//import { sdk } from '@farcaster/miniapp-sdk'
 
 export const metadata = {
   title: "Tic Tac Toe — Play & Win",
@@ -28,6 +29,22 @@ export default function RootLayout({
   return (
     <RootProvider>
       <html lang="en">
+        <head>
+           <meta
+      name="fc:miniapp"
+      content='{
+        "version": "next",
+        "imageUrl": "https://i.ibb.co/fVrrc7dt/unnamed-1.png",
+        "button": {
+          "title": "PLAY AND WIN",
+          "action": {
+            "type": "launch_frame",
+            "url": "https://tic-tac-pearl.vercel.app/"
+          }
+        }
+      }'
+    />
+        </head>
         <body className={`${inter.variable} ${sourceCodePro.variable}`}>
           <div className="app-shell">
             <header className="header">
@@ -46,6 +63,8 @@ export default function RootLayout({
               next.
             </footer>
           </div>
+          
+         
         </body>
       </html>
     </RootProvider>
