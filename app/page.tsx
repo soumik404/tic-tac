@@ -5,6 +5,11 @@ import styles from './page.module.css';
 
 type Cell = null | 'X' | 'O';
 type Difficulty = 'easy' | 'medium' | 'hard';
+type Score = { X: number; O: number; draw: number; };
+
+interface WindowWithWebkit {
+  webkitAudioContext?: typeof AudioContext;
+}
 
 const LINES = [
   [0,1,2],[3,4,5],[6,7,8],
@@ -27,7 +32,7 @@ function Game() {
   const [turn, setTurn] = useState<'X'|'O'>('X');
   const [status, setStatus] = useState('Your turn — you are X');
   const [stopped, setStopped] = useState(false);
-  const [score, setScore] = useState({ X: 0, O: 0, draw: 0 });
+  const [score, setScore] = useState<Score>({ X: 0, O: 0, draw: 0 });
   const [winningIndexes, setWinningIndexes] = useState<number[] | null>(null);
   const [difficulty, setDifficulty] = useState<Difficulty>('medium');
 
@@ -47,7 +52,8 @@ function Game() {
         playDraw();
       } else {
         setStatus(`${w} wins`);
-        setScore(s => ({ ...s, [w]: (s as any)[w] + 1 }));
+        // w is keyof Score so we can index safely
+        setScore(s => ({ ...s, [w]: (s[w] as number) + 1 } as Score));
         const winLine = findWinningLine(board, w);
         setWinningIndexes(winLine ?? null);
         playWin();
@@ -80,7 +86,8 @@ function Game() {
     if (muted) return;
     if (audioCtxRef.current) return;
     try {
-      const Ctx = (window.AudioContext || (window as any).webkitAudioContext) as typeof AudioContext | undefined;
+      const w = window as unknown as WindowWithWebkit;
+      const Ctx = (window.AudioContext || w.webkitAudioContext) as typeof AudioContext | undefined;
       if (!Ctx) return;
       const ctx = new Ctx();
       const gain = ctx.createGain();
