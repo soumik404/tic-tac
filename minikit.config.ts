@@ -8,11 +8,13 @@ const ROOT_URL =
  * @see {@link https://miniapps.farcaster.xyz/docs/guides/publishing}
  */
 export const minikitConfig = {
-  accountAssociation: {
-    header: "",
-    payload: "",
-    signature: ""
+  
+  "accountAssociation": {
+    "header": "eyJmaWQiOjkzMjEwNywidHlwZSI6ImN1c3RvZHkiLCJrZXkiOiIweDc4MUY0Q0E2ZTlhMjcyODU5YWY1QzMxRDAzNmU3NjY1MDlmRTA1NzkifQ",
+    "payload": "eyJkb21haW4iOiJ0aWMtdGFjLXBlYXJsLnZlcmNlbC5hcHAifQ",
+    "signature": "MHg1NTU3NTBlYjcxOGNmMTI1ODFiOGFiOTk2YTIxOTgwN2EyMGVkN2ZhYTRiNWIzN2NkMTE4ODVlODA3M2JjYjZiNmJlNWE5OGFiNDg3MDMzYTJmZDkzNjAwMjU5ZGY4Y2FhY2E5NmE0NDM3MDExMDExNDMyYmE0YzUwODliMWViNTFj"
   },
+
   miniapp: {
     version: "1",
     name: "Tic-Tac-Toe", 
@@ -27,7 +29,7 @@ export const minikitConfig = {
     primaryCategory: "social",
     tags: ["tic-tac-toe", "web3", "crypto game", "base", "farcaster", "mini app", "blockchain", "gainchainn", "fun game", "play to earn"],
     heroImageUrl: `${ROOT_URL}/blue-hero.png`, 
-    tagline: "",
+    tagline: "tic-tac-toe",
     ogTitle: "",
     ogDescription: "",
     ogImageUrl: `${ROOT_URL}/blue-hero.png`,
